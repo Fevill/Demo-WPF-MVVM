@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="DemoVue"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DEMO_WPF_MVVM_VB"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <local:DemoVueModel></local:DemoVueModel>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="204"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="530*"/>
+            <ColumnDefinition Width="127.2"/>
+            <ColumnDefinition Width="143*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid  Margin="10,10,9.6,9.6" ColumnWidth="*" IsReadOnly="True"  CanUserAddRows="False" ItemsSource="{Binding Liste}"  AutoGenerateColumns="False" Grid.RowSpan="2" Background="#FFEAEAEA" SelectionChanged="DataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Prenom}" ClipboardContentBinding="{x:Null}" Header="Prénom"/>
+                <DataGridTextColumn Binding="{Binding Nom}" ClipboardContentBinding="{x:Null}" HeaderStringFormat="" Header="Nom"/>
+                <DataGridTextColumn Binding="{Binding Age}" ClipboardContentBinding="{x:Null}" Header="Age"/>
+                <DataGridTextColumn Binding="{Binding Date_nais}" ClipboardContentBinding="{x:Null}" Header="Date de naissance"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Prenom : " Grid.Column="1" Margin="10.4,81,4.8,0" Height="33" VerticalAlignment="Top"/>
+        <TextBox Margin="5.2,75,10,0" TextWrapping="Wrap" Text="{Binding PersonneActuel.Prenom, Mode=TwoWay}" Grid.Column="2" Height="24" VerticalAlignment="Top"/>
+
+        <Label Content="Nom : " Margin="10.4,110,4.8,0" Grid.Column="1" Height="30" VerticalAlignment="Top"/>
+        <TextBox Margin="5.2,104,8,0" TextWrapping="Wrap" Text="{Binding PersonneActuel.Nom, Mode=TwoWay}" Grid.Column="2" Height="24" VerticalAlignment="Top"/>
+
+        <Label Content="Age : " Margin="15.4,146,4.8,0" Grid.Column="1" Height="24" VerticalAlignment="Top"/>
+        <TextBox TextWrapping="Wrap" Margin="5.2,147,8,0" Text="{Binding PersonneActuel.Age, Mode=TwoWay}" Grid.Column="2" Height="24" VerticalAlignment="Top"/>
+
+        <Label Content="Date de naissance : " Margin="10.4,183,4.8,0" Grid.Column="1" Height="23" VerticalAlignment="Top"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding PersonneActuel.Date_nais, Mode=TwoWay,StringFormat=dd-MM-yyyy}" Grid.Column="2" Margin="5.2,184,8,0" Height="24" VerticalAlignment="Top"/>
+
+        <TextBlock Text ="Personne Sélectionée" Grid.Column="1" Margin="10.4,24,10,0" VerticalAlignment="Top" Style="{StaticResource MaterialDesignTitleTextBlock}" Grid.ColumnSpan="2" Height="27"/>
+        <Grid Grid.Column="1" Margin="0.4,0.4,0,-0.4" Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="191.2"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Ajouter" Grid.Column="1" Command="{Binding CommandeAjouter }" Margin="20.8,37,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150"/>
+            <Button Content="Modifier" Grid.Column="1" Command="{Binding CommandeModifier }" Margin="20.8,90,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150"/>
+            <Button Content="Supprimer" Grid.Column="1" Command="{Binding CommandeSupprimer }" Margin="20.8,139,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150"/>
+        </Grid>
+
+    </Grid>
+</UserControl>
